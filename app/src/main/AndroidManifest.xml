@@ -8,6 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -29,14 +30,24 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Geolocalisation"
-            android:label="@string/title_activity_geolocalisation">
+            android:name=".LocaliserTweetActivity"
+            android:label="@string/title_activity_geolocalisation" />
+        <activity android:name=".MainMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LireTweetActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f0902e2ea09dd0cfd1fe64cae40b7ffa2c1a87f7"/>
+
+        <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService"/>
+
+
     </application>
 
 </manifest>

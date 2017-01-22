@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GeoTweetLP</string>
     <string name="title_activity_geolocalisation">Map</string>
+    <string name="accessToken" translatable="false">pk.eyJ1IjoiY2l5OHdjOXZvMDAycjJ2cDk4MWFqaHg3ZSIsImEiOiJjaXk4d2NhZW8wMDJ0MnZwOTlseDBqcWYyIn0.KINAHEEwbVUag_a4W1ZiUA</string>
 </resources>
