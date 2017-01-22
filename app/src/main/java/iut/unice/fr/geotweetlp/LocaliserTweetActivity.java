@@ -1,7 +1,8 @@
 package iut.unice.fr.geotweetlp;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,18 +11,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Geolocalisation extends FragmentActivity implements OnMapReadyCallback {
+import java.util.ArrayList;
+import java.util.List;
+
+public class LocaliserTweetActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private List<TweetUser> listeTweetUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        listeTweetUser = new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geolocalisation);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Intent intent = getIntent();
+        listeTweetUser = (ArrayList<TweetUser>) intent.getSerializableExtra("listTweet");
+
     }
 
 
@@ -39,8 +49,11 @@ public class Geolocalisation extends FragmentActivity implements OnMapReadyCallb
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        for (TweetUser tweetText : listeTweetUser) {
+            LatLng tweetPosition = new LatLng(tweetText.getLatitude(), tweetText.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(tweetPosition).title(tweetText.getTweetName()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(tweetPosition));
+        }
+
     }
 }
